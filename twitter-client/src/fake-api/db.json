@@ -1,0 +1,29 @@
+{
+   "users": [
+      {
+         "username": "user 1",
+         "email": "user1@gmail.com",
+         "password": "Asd123",
+         "id": 1
+      },
+      {
+         "username": "user 2",
+         "email": "user2@gmail.com",
+         "password": "Asd123",
+         "id": 2
+      },
+      {
+         "username": "user 3",
+         "email": "user3@gmail.com",
+         "password": "Asd123",
+         "id": 3
+      },
+      {
+         "username": "Muh Aman Hidayat",
+         "email": "aman@gmail.com",
+         "password": "Asd123",
+         "id": 4
+      }
+   ],
+   "tweets": []
+}

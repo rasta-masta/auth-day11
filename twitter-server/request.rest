@@ -1,0 +1,46 @@
+http://localhost:2000/api
+
+###
+POST http://localhost:2000/users
+Content-Type: application/json
+
+{
+  "username": "Agna H",
+  "email" : "agna@mail.com",
+  "password" : "Asdasd" 
+}
+
+###
+POST http://localhost:2000/users/login
+Content-Type: application/json
+
+{
+        "email": "aman@mail.com",
+        "password": "Asdasd"
+    }
+
+###
+GET http://localhost:2000/users    
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzAwMTMyMjI3LCJleHAiOjE3MDAxMzU4Mjd9.JpJfKj91cOBuyjQYnrqJ6KoMEFNX8TfvQLRblEEqydQ
+
+###
+POST http://localhost:2000/tweets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzAwMTQwNTc1LCJleHAiOjE3MDAxNDQxNzV9.HRvDQ3M2LWTNmwgAAzzXcpwLuqyDxVpzuLPnbS87qoc
+
+{
+  "tweet": "Hey All..!!, Salam kenal",  
+  "userId": 5
+}
+
+###
+GET http://localhost:2000/tweets 
+Content-Type: application/json
+
+###
+GET http://localhost:2000/tweets/2 
+Content-Type: application/json
+
+###
+DELETE http://localhost:2000/tweets/5
+Content-Type: application/json
