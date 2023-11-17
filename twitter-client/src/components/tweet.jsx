@@ -15,23 +15,24 @@ import { useSelector } from "react-redux";
 export const TweetComp = () => {
    const [text, setText] = useState("");
    const { username, email, id } = useSelector((state) => state.user.value);
-
-   const handleTextChange = (event) => {
-      const newText = event.target.value;
-      setText(newText);
-   };
+   const token = localStorage.getItem("token");
 
    const handleTweet = async () => {
       try {
          const data = {
-            UserId: id,
+            userId: id,
             username,
             email,
             tweet: text,
          };
          console.log(data);
-         axios.post("http://localhost:2000/tweets", data);
+         axios.post("http://localhost:2000/tweets", data, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+         });
          setText("");
+         console.log(data);
          window.location.reload();
       } catch (err) {
          console.log(err);
@@ -51,7 +52,7 @@ export const TweetComp = () => {
             <Textarea
                placeholder="Apa yang sedang hangat dibicarakan?"
                value={text}
-               onChange={handleTextChange}
+               onChange={(e)=>setText(e.target.value)}
                fontSize="20px"
             />
             <Divider />
@@ -72,7 +73,9 @@ export const TweetComp = () => {
                   w="100px"
                   colorScheme="blue"
                   isDisabled={characterCount === 0 || characterCount > 50}
-                  onClick={handleTweet}>
+                  onClick={handleTweet}
+                  type="submit"
+                  >
                   Posting
                </Button>
             </Flex>

@@ -25,6 +25,7 @@ module.exports = {
           attributes: ["username", "email"]
         }]
       });
+      console.log(result);
       res.status(200).send(result)
     } catch (error) {
       console.log(error)

@@ -4,14 +4,24 @@ import { AiOutlineRetweet } from "react-icons/ai";
 import { IconTweet } from "./iconTweet";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
-const TweetDetail = ({ tweet, username, email }) => {  //also change this part
-  const idLogin = useSelector((state)=> state.user.value.id)
-  const [user, setUser] = useState([]);
-  // console.log(username)
+const TweetDetail = ({ tweet, username, email }) => {  
+   const[user, setUser] = useState(null)  
+  
+   useEffect(()=> {
+    const fetchUser = async() => {
+      try {
+        const response = await axios(`http://localhost:2000/tweets`)
+        setUser(response.data.rows.User)
+        console.log(setUser(response.data.rows.User))
+      } catch (error) {
+        console.error("Error Fetching User:", error)
+      }
+    }
+    fetchUser();
+  }, [username])
 
-  return (
+   return (
     <Flex
       p="20px"
       gap="20px"
@@ -20,10 +30,10 @@ const TweetDetail = ({ tweet, username, email }) => {  //also change this part
       borderRight="1px solid"
       borderColor="gray.100"
     >
-      <Avatar name={`${user.username}`} />
+      <Avatar name={`${username}`} />
       <Flex flexDirection="column" fontSize="20px" w="100%">
         <Flex gap="10px">
-          <Text fontWeight="bold">{username}</Text>
+          <Text fontWeight="bold">{`${username}`}</Text>
           <Text>{email}</Text>
         </Flex>
         <Text>{tweet}</Text>
@@ -45,16 +55,15 @@ export const ListTweet = () => {
       const { data } = await axios.get(
         "http://localhost:2000/tweets"
       );
-      setTweets(data);//change this part
+      setTweets( data );
     } catch (err) {
       console.log(err);
     }
   };
-    // console.log(tweets);
-
   useEffect(() => {
     getData();
   }, []);
+  
   return (
     <Flex flexDirection="column">
       {tweets.map((item, index) => {
@@ -62,8 +71,8 @@ export const ListTweet = () => {
           <TweetDetail
             key={index}
             tweet={item.tweet}
-            username={item.username}
-            email={item.email}
+            username={item.User.username}
+            email={item.User.email}
           />
         );
       })}
