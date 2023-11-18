@@ -12,8 +12,8 @@ const TweetDetail = ({ tweet, username, email }) => {
     const fetchUser = async() => {
       try {
         const response = await axios(`http://localhost:2000/tweets`)
-        setUser(response.data.rows.User)
-        console.log(setUser(response.data.rows.User))
+        setUser(response.data)
+        // console.log(response.data)
       } catch (error) {
         console.error("Error Fetching User:", error)
       }
@@ -33,7 +33,7 @@ const TweetDetail = ({ tweet, username, email }) => {
       <Avatar name={`${username}`} />
       <Flex flexDirection="column" fontSize="20px" w="100%">
         <Flex gap="10px">
-          <Text fontWeight="bold">{`${username}`}</Text>
+          <Text fontWeight="bold">{username}</Text>
           <Text>{email}</Text>
         </Flex>
         <Text>{tweet}</Text>

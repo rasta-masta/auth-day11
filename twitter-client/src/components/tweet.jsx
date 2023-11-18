@@ -20,12 +20,11 @@ export const TweetComp = () => {
    const handleTweet = async () => {
       try {
          const data = {
-            userId: id,
+            UserId: id,
             username,
             email,
             tweet: text,
          };
-         console.log(data);
          axios.post("http://localhost:2000/tweets", data, {
           headers: {
             Authorization: `Bearer ${token}`

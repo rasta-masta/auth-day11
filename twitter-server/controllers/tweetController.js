@@ -4,28 +4,30 @@ const User = db.User;
 
 module.exports = {
   posting: async(req, res) => {
-    const {tweet, userId} = req.body
+    const {UserId, username, email, tweet} = req.body
     try {
       await Tweet.create({
+        UserId,
+        username,
+        email,
         tweet,
-        userId
       });
       res.status(200).json(`TWEET POSTED..!!`)
     } catch (error) {
       console.log(error)
-      res.status(500).send({ msg: 'INTERNAL SERVER ERROR..!!'})
+      res.status(500).send({result,  msg: 'INTERNAL SERVER ERROR..!!'})
     }
   },
   getAllTweet: async(req, res) => {
     try {
       const result = await Tweet.findAll({
-        order:[["id", "DESC"]],
+        order:[["UserId", "DESC"]],
         include: [{
           model: User,
           attributes: ["username", "email"]
         }]
       });
-      console.log(result);
+      // console.log(result);
       res.status(200).send(result)
     } catch (error) {
       console.log(error)
